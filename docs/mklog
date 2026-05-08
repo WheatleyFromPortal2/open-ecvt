@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# simple script to start a new log with today's date in the ./buildlogs folder
+
+DATE=$(date -I)
+
+cd "./buildlogs" # make sure we exit VIM in ./buildlogs 
+echo -e "# ${DATE}\n" > $DATE # first line should be the date/filename
+
+"${EDITOR}" "${DATE}" # open the pre-created log in your favorite editor :)
+
