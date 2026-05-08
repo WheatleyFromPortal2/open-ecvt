@@ -19,8 +19,13 @@ target_include_directories(ecvt_dcu PRIVATE
     src/
 )
 
+# enable floating point printf support
+pico_enable_stdio_usb(ecvt_dcu 1)
+pico_enable_stdio_uart(ecvt_dcu 0)
+
 target_link_libraries(ecvt_dcu
     pico_stdlib
+    pico_float
     pico_multicore
     hardware_uart
     hardware_pio

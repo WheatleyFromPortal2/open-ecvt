@@ -6,11 +6,16 @@
 #define VOLTS_PER_COUNT (3.3f / 4096.0f)
 
 // ADC
+void adc_utils_init() {
+    adc_init();
+    adc_set_temp_sensor_enabled(true);
+}
+
 float adc_to_voltage(uint16_t raw) { 
     return raw * VOLTS_PER_COUNT; 
 }
 
-float read_cpu_temp(void) {
+int16_t read_cpu_temp(void) {
     adc_select_input(4); // 4 is the built-in temp sensor
     uint16_t raw = adc_read();
     float voltage = adc_to_voltage(raw);

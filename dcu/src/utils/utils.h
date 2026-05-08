@@ -7,8 +7,9 @@
 #include <stdint.h>
 
 // ADC
+void adc_utils_init(void);
 float adc_to_voltage(uint16_t raw);
-float read_cpu_temp(void); // return CPU temp in celsius
+int16_t read_cpu_temp(void); // return CPU temp in celsius
 
 // LED
 void led_init(void);
