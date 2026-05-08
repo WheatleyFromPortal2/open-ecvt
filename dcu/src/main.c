@@ -1,12 +1,11 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 #include "utils/utils.h"
+#include "utils/repl.h"
+#include "utils/repl_cmds.h"
 
 int main(void) {
     stdio_init_all();
-
-    // disable automatic \r\n translation
-    stdio_set_translate_crlf(&stdio_usb, false);
 
     led_init();
     adc_utils_init();
@@ -19,6 +18,11 @@ int main(void) {
     printf("eCVT DCU starting...\n");
     printf("hello world from Pico!\n");
 
+
+    // run our REPL
+    repl_run(cmds, n_cmds);
+
+    /*
     unsigned long count = 0;
     while (true) {
         printf("alive: %lu\n", count++);
@@ -27,4 +31,5 @@ int main(void) {
         led_toggle();
         sleep_ms(1000);
     }
+    */
 }

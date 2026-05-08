@@ -2,6 +2,9 @@
 #include "utils.h"
 #include "hardware/adc.h"
 #include "pico/stdlib.h"
+#include <stdbool.h>
+#include "hardware/watchdog.h"
+#include "pico/bootrom.h"
 
 #define VOLTS_PER_COUNT (3.3f / 4096.0f)
 
@@ -28,8 +31,13 @@ void led_init(void) {
     gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
 }
 
+bool get_led(void) { // get LED value
+    return gpio_get(PICO_DEFAULT_LED_PIN);
+}
+
+
 void led_on(void) { 
-    gpio_put(PICO_DEFAULT_LED_PIN, 1); 
+    gpio_put(PICO_DEFAULT_LED_PIN, 1);
 }
 
 void led_off(void) { 
@@ -43,4 +51,14 @@ void led_toggle(void) {
 // timing
 uint32_t millis(void) { 
     return to_ms_since_boot(get_absolute_time()); 
+}
+
+void reboot(void) {
+    // TODO: make sure we're safe before we reboot
+    watchdog_reboot(0, 0, 0);
+}
+
+void bootsel(void) {
+    // TODO: make sure we're safe before we bootsel reboot
+    reset_usb_boot(0, 0);
 }

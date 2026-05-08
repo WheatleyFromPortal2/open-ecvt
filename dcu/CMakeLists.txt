@@ -13,6 +13,8 @@ pico_sdk_init()
 add_executable(ecvt_dcu
     src/main.c
     src/utils/utils.c
+    src/utils/repl.c
+    src/utils/repl_cmds.c
 )
 
 target_include_directories(ecvt_dcu PRIVATE
